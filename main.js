@@ -1,57 +1,64 @@
-window.onload = () => {
-    fetch('data.json')
-    .then(response => response.json())
-    .then(data => {
-        render(data);
-    })
-}
-
-const render = (data) => {
-    const chartCont = document.getElementById('chart_container');
-    const total = document.querySelector('.total');
-
-    const maxAmount = data.reduce((max, obj) => Math.max(max, obj.amount), 0);
-    const totalSum = data.reduce((sum, obj) => sum + obj.amount, 0);
-    
-    data.forEach(obj => {
-
-        const contentContainer = document.createElement('div');
-        const bar = document.createElement('div');
-        const days = document.createElement('span');
-        const cost = document.createElement('span');
-        
-        const ratio = obj.amount / maxAmount;
-        const barHeight = ratio * 100 + 'px';
-
-        const initialBarHeight = "5px"; // Tamaño inicial de la barra
-        const finalBarHeight = barHeight; // Tamaño final de la barra
-
-        // Establecer la altura inicial de la barra
-        bar.style.height = initialBarHeight;
-
-        setTimeout(() => {
-            bar.style.height = barHeight;
-        }, 100);
-        days.innerText = obj.day;
-        cost.innerText = '$'+obj.amount;
-        total.innerText = '$'+totalSum.toFixed(2);
-
-        bar.className = 'bar';
-        days.className = 'days';
-        cost.className = 'cost';
-        contentContainer.className = 'content_container';
-
-        chartCont.appendChild(contentContainer);
-        contentContainer.appendChild(cost);
-        contentContainer.appendChild(bar);
-        contentContainer.appendChild(days);
-
-        bar.addEventListener('mouseenter', () => {
-            cost.style.visibility = 'visible';
-        });
-
-        bar.addEventListener('mouseleave', () => {
-            cost.style.visibility = 'hidden';
-        });
+const elements = {
+    totalBalance: document.getElementById('totalBalance'),
+    totalDays: document.getElementById('totalDays'),
+    chartsContainer: document.getElementById('chartContainer'),
+    totalExpense: document.getElementById('totalExpense'),
+  };
+  
+  const fetchData = async () => {
+    try {
+      const response = await fetch('/data.json');
+      if (!response.ok) {
+        throw new Error('Error in the JSON');
+      }
+      const data = await response.json();
+      dataHandler(data);
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  };
+  
+  const dataHandler = (data) => {
+    const maxAmount = data.reduce((max, expense) => Math.max(max, expense.amount), 0);
+    const totalAmount = data.reduce((sum, obj) => sum + obj.amount, 0);
+    const totalDays = data.length;
+  
+    data.forEach((expense) => {
+      renderData(expense, maxAmount, totalAmount, totalDays);
     });
-}
+  };
+  
+  const renderData = (data, max, total, days) => {
+    const chartContainer = document.createElement('article');
+    const chart = document.createElement('div');
+    const dayLabel = document.createElement('span');
+    const expenseLabel = document.createElement('span');
+    const ratio = data.amount / max;
+    const chartHeight = ratio * 150 + 'px';
+    const initialChartheight = '5px';
+  
+    chart.style.height = initialChartheight;
+  
+    setTimeout(() => {
+      chart.style.height = chartHeight;
+    }, 200);
+  
+    expenseLabel.classList = 'expense';
+    expenseLabel.innerText = data.amount;
+    chart.className = 'expenses-info_chart-container_chart';
+    dayLabel.innerText = data.day;
+  
+    if (data.amount === max) chart.classList.add('max');
+  
+    elements.chartsContainer.appendChild(chartContainer);
+    chartContainer.appendChild(expenseLabel);
+    chartContainer.appendChild(chart);
+    chartContainer.appendChild(dayLabel);
+    elements.totalExpense.innerText = '$' + total;
+    elements.totalDays.innerText = days;
+  };
+  
+  window.onload = () => {
+    fetchData();
+  };
+  

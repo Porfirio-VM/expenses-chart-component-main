@@ -9,49 +9,34 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap">
   <title>Expenses chart component</title>
 </head>
-<body>
-  <section>
-    <div class="main_container">
-    <header class="head">
-      <div class="head_container">
-        <p>My balance</p>
-        <h1>$921.48</h1>
-      </div>
-      <div class="head_image">
-        <img src="images/logo.svg" alt="">
-      </div>
-    </header>
-    <main>
-      <div class="main_container">
-        <h1>Spending - Last 7 days</h1>
-        <div class="main_chart">
-          <div class="head_chart" id="head_chart">
-            
-          </div>
-          <div class="chart_container" id="chart_container" >
+<body class="flex">
+  <!-- Balance -->
+  <header class="flex expenses-header">
+    <div class="balance">
+      <p>My balance</p>
+      <h2 id="totalBalance">$921.48</h2>
+    </div>
+    <picture>
+      <img src="/images/logo.svg" alt="">
+    </picture>
+  </header>
+<!-- main container -->
+  <main class="flex expenses-info">
+    <h2>Spending - Last <span id="totalDays"></span> days</h2>
+    <section id="chartContainer" class="flex expenses-info_chart-container">
 
-          </div>
-          <div class="chart_footer" id="chart_footer">
-
-          </div>
-        </div>
-        <hr>
-        <div class="main_footer">
-          <p class="p_transp">Total this month</p>
-          <div class="foot_container">
-            <div class="foot_item">
-              <h1 class="total">$00.00</h1>
-            </div>
-            <div class="foot_item">
-              <p class="p_end">+2.4%</p>
-              <p class="p_transp">from last month</p>
-            </div>
-          </div>
-        </div>
+    </section>
+    <section class="flex expenses-info_summary">
+      <div>
+        <p>Total this month</p>
+        <h1 id="totalExpense">$00.00</h1>
       </div>
-    </main>
-  </div>
-  </section> 
+      <div class="percents">
+        <h4>+2.4%</h4>
+        <p>From last month</p>
+      </div>
+    </section>
+  </main>
 </body>
 <script src="main.js"></script>
 </html>
