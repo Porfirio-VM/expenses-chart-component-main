@@ -1,4 +1,4 @@
-# Newsletter sign-up form with success message
+# Expenses chart component
 ![Expenses chart component challenge on Frontend Mentor](./design/desktop-preview.jpg)
 
 ## Welcome! 👋
