@@ -19,8 +19,8 @@ Users should be able to:
 
 ## Links
 
-- Solution URL: [https://github.com/Porfirio-VM/newsletter-sign-up-with-success-message-main](https://github.com/Porfirio-VM/expenses-chart-component-main)
-- Live Site URL: [https://newsletter-sign-up-pjvm.netlify.app](https://expenses-chart-component-main-pjvm.netlify.app/)
+- Solution URL: https://github.com/Porfirio-VM/expenses-chart-component-main/
+- Live Site URL: [https://github.com/Porfirio-VM/expenses-chart-component-main/](https://expenses-chart-component-main-pjvm.netlify.app/)
 
 ## Built with
 
